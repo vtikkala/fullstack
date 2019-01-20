@@ -1,0 +1,25 @@
+note over selain:
+Käyttäjä lisää uuden muistiinpanon ja painaa Talleta.
+
+Selain suorittaa viestin lähettämiseen vaadittavan JS-koodin ja
+lähettää palvelimelle kutsun JSON-muotoisella sisällöllä:
+
+content: "[Käyttäjän muistiinpano]"
+date: "[Aikaleima]"
+end note
+
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over palvelin:
+Selain vastaanottaa kutsun ja sen sisältämän JSON-tiedoston,
+suorittaa palvelin pään ohjelman ja palauttaa tiedon selaimelle
+onnistuneesta muistiinpanon lisäämisestä.
+end note over 
+
+palvelin-->selain: JSON-tiedosto [{"message":"note created"}]
+
+note over selain:
+Selain vastaanottaa palautteen ja suorittaa JS-koodin, jonka
+seurauksena muistiinpanot-sivu piirretään uudelleen lisätyllä
+muistiinpanolla.
+end note
