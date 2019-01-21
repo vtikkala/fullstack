@@ -22,4 +22,4 @@ note over selain:
 Selain vastaanottaa palautteen ja suorittaa JS-koodin, jonka
 seurauksena muistiinpanot-sivu piirretään uudelleen lisätyllä
 muistiinpanolla.
-end note
+end note	
