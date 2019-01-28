@@ -7,17 +7,27 @@ const Header = (props) => {
 
 const Statistic = (props) => {
     return (
-        <>
-            {props.result} {props.clicks} <br />
-        </>
+        <table className="fixed">
+            <tbody>
+                <tr>
+                    <td width="75px">{props.result}</td> 
+                    <td width="50px">{props.clicks}</td>
+                </tr>
+            </tbody>
+        </table>
     )
 }
 
 const Positive = (props) => {
     return (
-        <>
-            {props.name} {(props.value * 100).toFixed(0) + ' %'} 
-        </>
+        <table className="fixed">
+            <tbody>
+                <tr>
+                    <td width="75px">{props.name}</td> 
+                    <td width="50px">{(props.value * 100).toFixed(0) + ' %'} </td>
+                </tr>
+            </tbody>
+        </table>
     )
 }
 
@@ -61,7 +71,7 @@ const App = () => {
         setToBad(bad + 1)
     }
 
-    if ((good + neutral + bad) == 0) {
+    if ((good + neutral + bad) === 0) {
         return (
             <div>
                 <Header header={header} />
