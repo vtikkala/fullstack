@@ -21,6 +21,10 @@ const Positive = (props) => {
     )
 }
 
+const NoResult = () => {
+    return <p>Ei yhtään palautetta annettu</p>
+}
+
 const App = () => {
     const header = 'anna palautetta'
     const statistics = 'statistiikka'
@@ -41,24 +45,39 @@ const App = () => {
         setBad(newValue)
     }
 
-    return (
-        <div>
-            <Header header={header} />
-            
-            <button onClick={() => setToGood(good + 1)}>hyvä</button>
-            <button onClick={() => setToNeutral(neutral + 1)}>neutraali</button>
-            <button onClick={() => setToBad(bad + 1)}>huono</button>
+    if ((good + neutral + bad) == 0) {
+        return (
+            <div>
+                <Header header={header} />
+                
+                <button onClick={() => setToGood(good + 1)}>hyvä</button>
+                <button onClick={() => setToNeutral(neutral + 1)}>neutraali</button>
+                <button onClick={() => setToBad(bad + 1)}>huono</button>
+    
+                <Header header={statistics} />
+                <p>Ei yhtään palautetta annettu</p>
+            </div>
+        )
+    } else {
 
-            <Header header={statistics} />
-            
-            <Result result='hyvä' clicks={good} />
-            <Result result='neutraali' clicks={neutral} />
-            <Result result='huono' clicks={bad} />
-            <Result result='yhteensä' clicks={good + neutral + bad} />
-            <Result result='keskiarvo' clicks={(good * 1 + neutral *0 + bad * (-1)) / (good + neutral + bad)} />
-            <Positive name='positiivisia' value={good / (good + neutral + bad)} />
-        </div>
-    )
+        return (
+            <div>
+                <Header header={header} />
+                
+                <button onClick={() => setToGood(good + 1)}>hyvä</button>
+                <button onClick={() => setToNeutral(neutral + 1)}>neutraali</button>
+                <button onClick={() => setToBad(bad + 1)}>huono</button>
+
+                <Header header={statistics} />
+                <Result result='hyvä' clicks={good} />
+                <Result result='neutraali' clicks={neutral} />
+                <Result result='huono' clicks={bad} />
+                <Result result='yhteensä' clicks={good + neutral + bad} />
+                <Result result='keskiarvo' clicks={(good * 1 + neutral *0 + bad * (-1)) / (good + neutral + bad)} />
+                <Positive name='positiivisia' value={good / (good + neutral + bad)} />
+            </div>
+        )
+    }
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
