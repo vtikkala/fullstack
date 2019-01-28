@@ -1,61 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
 const Header = (props) => {
-    console.log(props)
-    return <h1>{props.course.name}</h1>
+    return <h1>{props.header}</h1> 
 }
 
-const Content = (props) => {
+const Result = (props) => {
     return (
-        <>
-            <Part1 part1={props.parts[0].name} exercises1={props.parts[0].exercises} />
-            <Part2 part2={props.parts[1].name} exercises2={props.parts[1].exercises} />
-            <Part3 part3={props.parts[2].name} exercises3={props.parts[2].exercises} />
-        </>
+        <p>
+            {props.result} {props.clicks}
+        </p>
     )
 }
 
-const Part1 = (props) => {
-    return <p>{props.part1} {props.exercises1}</p>
-}
-
-const Part2 = (props) => {
-    return <p>{props.part2} {props.exercises2}</p>
-}
-
-const Part3 = (props) => {
-    return <p>{props.part3} {props.exercises3}</p>
-}
-
-const Total = (props) => {
-    return <p>yhteensä {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises} tehtävää</p>
-}
-
 const App = () => {
-    const course = {
-        name: 'Half Stack -sovelluskehitys',
-        parts: [
-            {
-                name: 'Reactin perusteet',
-                exercises: 10
-            },
-            {
-                name: 'Tiedonvälitys propseilla',
-                exercises: 7
-            },
-            {
-                name: 'Komponenttien tila',
-                exercises: 14
-            }
-    ]
+    const header = 'anna palautetta'
+    const statistics = 'statistiikka'
+    
+    const [good, setGood] = useState(0)
+    const [neutral, setNeutral] = useState(0)
+    const [bad, setBad] = useState(0)
+    
+    const setToGood = (newValue) => {
+        setGood(newValue)
+    }
+
+    const setToNeutral = (newValue) => {
+        setNeutral(newValue)
+    }
+
+    const setToBad = (newValue) => {
+        setBad(newValue)
     }
 
     return (
         <div>
-            <Header course={course} />
-            <Content parts={course.parts} />   
-            <Total parts={course.parts} />
+            <Header header={header} />
+            
+            <button onClick={() => setToGood(good + 1)}>hyvä</button>
+            <button onClick={() => setToNeutral(neutral + 1)}>neutraali</button>
+            <button onClick={() => setToBad(bad + 1)}>huono</button>
+
+            <Header header={statistics} />
+            <Result result='Hyvä' clicks={good} />
+            <Result result='Neutraali' clicks={neutral} />
+            <Result result='Huono' clicks={bad} />
         </div>
     )
 }
