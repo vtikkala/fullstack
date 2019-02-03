@@ -36,12 +36,13 @@ const Content = (props) => {
 const Total = (props) => {
     const { totals } = props
     let sum = 0
+    
+    const total = totals.reduce( (acc, current, currIndex, array) => {
+        sum += current.exercises
+        return sum
+    }, 0)
 
-    totals.forEach(total => {
-        sum = sum + total.exercises
-    });
-
-    return <p>yhteensä {sum} tehtävää</p>
+    return <p>yhteensä {total} tehtävää</p>
 }
 
 const App = () => {
