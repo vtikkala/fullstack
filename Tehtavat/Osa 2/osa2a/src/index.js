@@ -1,80 +1,56 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-
-
-const Course = (props) => {    
-    return (
-        <>
-            <Header header = {props.course.name} />
-            <Content contents = {props.course.parts} />
-            <Total totals = {props.course.parts} />            
-        </>
-    )
-}
-
-const Header = (props) => {
-    const { header } = props
-    return <h1>{header}</h1>
-}
-
-const Content = (props) => {
-    const { contents } = props
-    
-    const rows = () => contents.map(content => 
-        <p key={content.id}>
-            {content.name} {content.exercises}
-        </p>)
-    
-    return (
-        <>
-            {rows()}
-        </>
-    )
-
-}
-
-const Total = (props) => {
-    const { totals } = props
-    let sum = 0
-    
-    const total = totals.reduce( (acc, current, currIndex, array) => {
-        sum += current.exercises
-        return sum
-    }, 0)
-
-    return <p>yhteensä {total} tehtävää</p>
-}
+import Course from './components/Course'
 
 const App = () => {
-    const course = {
-        name: 'Half Stack -sovelluskehitys',
-        parts: [
-            {
-                name: 'Reactin perusteet',
-                exercises: 10,
-                id: 1,
-            },
-            {
-                name: 'Tiedonvälitys probseilla',
-                exercises: 7,
-                id: 2
-            },
-            {
-                name: 'Komponenttien tila',
-                exercises: 14,
-                id: 3
-            },
-            {
-                name: 'Redux',
-                exercises: 7,
-                id: 4
-            }
-        ]
-    }
+    const courses = [
+        {
+            name: 'Half Stack -sovelluskehitys',
+            parts: [
+                {
+                    name: 'Reactin perusteet',
+                    exercises: 10,
+                    id: 1,
+                },
+                {
+                    name: 'Tiedonvälitys probseilla',
+                    exercises: 7,
+                    id: 2
+                },
+                {
+                    name: 'Komponenttien tila',
+                    exercises: 14,
+                    id: 3
+                },
+                {
+                    name: 'Redux',
+                    exercises: 7,
+                    id: 4
+                }
+            ]
+        },
+        {
+            name: 'Node.js',
+            id: 2,
+            parts: [
+                {
+                    name: 'Routing',
+                    exercises: 3,
+                    id: 1
+                },
+                {
+                    name: 'Middlewaret',
+                    exercises: 7,
+                    id: 2
+                }
+            ]
+        }   
+    ]
 
     return (
         <div>
-            <Course course={course} />
+            <Course course={courses[0]} />
+            <Course course={courses[1]} />
         </div>
     )
 }
