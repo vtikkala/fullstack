@@ -13,8 +13,19 @@ const App = () => {
       name: newName,
     }
 
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+    console.log(persons)
+    console.log(nameObject)
+  
+    const testi = persons.some(person => person['name'] === nameObject.name)
+    console.log(testi)
+
+    if (testi) {
+      alert(newName + ' on jo luettelossa')
+    } else {
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    }
+    
   }
 
   const rows = () => persons.map(person =>
@@ -23,6 +34,9 @@ const App = () => {
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
+
+    
+   
   }
 
    return (
